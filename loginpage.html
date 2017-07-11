@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+
+  </style>
+</head>
+<body>
+  <div class="container">
+  <h3> Login </h3>
+  <form class="form-horizontal" id = "loginform">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="uname">Username:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="uname" placeholder="Enter Username" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pwd">Password:</label>
+      <div class="col-sm-10">          
+        <input type="password" class="form-control" id="pwd" placeholder="Enter Password" >
+        <span id = "loginError"></span>
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+
+  </form>
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Success</h4>
+      </div>
+      <div class="modal-body">
+        <p>Login successful!</p>
+      </div>
+      <div class="modal-footer">
+        <a href="exercisediary.html" class="btn btn-default">OK</a>
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal"  >OK</button>-->
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+
+  
+$(document).ready(function(){
+
+      $("#loginform").on('submit', function(){
+        $.post('signupaction.php',{
+        function: "login",
+        uname: $('#uname').val(),
+        pwd:$('#pwd').val()
+      }, function(data, status){
+        if(data=="Success"){
+          $('#myModal').modal('show');
+        }
+        else{
+       $('#loginError').append(data);
+        }
+    });
+    return false;
+
+  });
+});
+
+</script>
+</body>
+</html>
